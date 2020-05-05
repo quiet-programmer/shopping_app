@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/providers/products_provider.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final double price;
-  final String title;
+  final String id;
 
-  ProductDetailScreen({this.title, this.price});
+  ProductDetailScreen({this.id});
   @override
   Widget build(BuildContext context) {
+    final loadedProducts =
+        Provider.of<ProductsProvider>(context).findById(id);
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(loadedProducts.title),
       ),
     );
   }

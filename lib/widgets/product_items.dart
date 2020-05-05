@@ -1,41 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/providers/products.dart';
 import 'package:shopping_app/screens/product_detail_screen.dart';
+import 'package:shopping_app/widgets/cart.dart';
 
 class ProductItems extends StatelessWidget {
-  final String id;
-  final String title;
-  final String imageUrl;
-  final double price;
-  final String description;
-
-  ProductItems({this.id, this.title, this.imageUrl, this.price, this.description});
+  
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Products>(context, listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: GridTile(
         child: GestureDetector(
-          onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (_){
-              return ProductDetailScreen(title: title, price: price,);
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return ProductDetailScreen(
+                id: product.id,
+              );
             }));
           },
           child: Image.network(
-            imageUrl,
+            product.imageUrl,
             fit: BoxFit.cover,
-          ), 
+          ),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
-          leading: IconButton(
-            icon: Icon(
-              Icons.favorite_border,
-              color: Theme.of(context).accentColor,
-            ),
-            onPressed: () {},
+          leading: Consumer<Products>(
+            builder: (_, product, child) {
+              return IconButton(
+                icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: Theme.of(context).accentColor,
+                ),
+                onPressed: () {
+                  product.toggleFavoriteStatus();
+                },
+              );
+            },
           ),
           title: Text(
-            title,
+            product.title,
+            style: TextStyle(fontSize: 15),
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
@@ -43,7 +51,9 @@ class ProductItems extends StatelessWidget {
               Icons.shopping_cart,
               color: Theme.of(context).accentColor,
             ),
-            onPressed: () {},
+            onPressed: () {
+              cart.addItem(product.id, product.price, product.title);
+            },
           ),
         ),
       ),

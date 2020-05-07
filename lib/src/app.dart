@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app/providers/orders.dart';
 import 'package:shopping_app/providers/products_provider.dart';
 import 'package:shopping_app/screens/products_overview_screen.dart';
-import 'package:shopping_app/widgets/cart.dart';
+import 'package:shopping_app/providers/cart.dart';
 
 class App extends StatelessWidget {
   @override
@@ -14,6 +15,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Cart(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Orders(),
         ),
       ],
       child: MaterialApp(

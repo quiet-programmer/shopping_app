@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/providers/products_provider.dart';
+import 'package:shopping_app/screens/edit_product_screen.dart';
 import 'package:shopping_app/widgets/user_product_item.dart';
 
 class UserProductScreen extends StatelessWidget {
@@ -13,7 +14,11 @@ class UserProductScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return EditProductScreen();
+              }));
+            },
           )
         ],
       ),
@@ -22,7 +27,7 @@ class UserProductScreen extends StatelessWidget {
         child: ListView.builder(
           itemCount: productData.items.length,
           itemBuilder: (_, index) {
-            return UserProductItems(productData.items[index].title, productData.items[index].imageUrl);
+            return UserProductItems(id: productData.items[index].id,title: productData.items[index].title, imageUrl:productData.items[index].imageUrl);
           },
         ),
       ),

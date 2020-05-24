@@ -5,7 +5,6 @@ import 'package:shopping_app/screens/product_detail_screen.dart';
 import 'package:shopping_app/providers/cart.dart';
 
 class ProductItems extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Products>(context, listen: false);
@@ -53,6 +52,16 @@ class ProductItems extends StatelessWidget {
             ),
             onPressed: () {
               cart.addItem(product.id, product.price, product.title);
+              Scaffold.of(context).hideCurrentSnackBar();
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text("Item added to Cart"),
+                duration: Duration(seconds: 3),
+                action: SnackBarAction(
+                    label: "Undo",
+                    onPressed: () {
+                      cart.removerSingleItem(product.id);
+                    }),
+              ));
             },
           ),
         ),

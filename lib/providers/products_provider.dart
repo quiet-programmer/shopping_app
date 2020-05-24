@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shopping_app/providers/products.dart';
 
 class ProductsProvider with ChangeNotifier {
-
   //list of items
   List<Products> _items = [
     Products(
@@ -54,5 +53,34 @@ class ProductsProvider with ChangeNotifier {
     return _items.firstWhere(
       (prod) => prod.id == id,
     );
+  }
+
+  void addProduct(Products products) {
+    final newProduct = Products(
+      id: DateTime.now().toString(),
+      title: products.title,
+      description: products.description,
+      price: products.price,
+      imageUrl: products.imageUrl,
+    );
+
+    _items.add(newProduct);
+
+    notifyListeners();
+  }
+
+  void updateProduct(String productId, Products newProduct) {
+    final prodIndex = _items.indexWhere((prod) => prod.id == productId);
+    if (prodIndex >= 0) {
+      _items[prodIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  }
+
+  void deleteProduct(String prodcutId) {
+    _items.removeWhere((prod) => prod.id == prodcutId);
+    notifyListeners();
   }
 }

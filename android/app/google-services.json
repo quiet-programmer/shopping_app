@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "984460108100",
+    "firebase_url": "https://webservertut.firebaseio.com",
+    "project_id": "webservertut",
+    "storage_bucket": "webservertut.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984460108100:android:90d7fc8d62690474713711",
+        "android_client_info": {
+          "package_name": "com.example.shopping_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984460108100-05vrrdg22mbd2smpak5bj6718i9l8tn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAofE4xZz3MEWra25ywUmjO38DHY29oVQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984460108100-05vrrdg22mbd2smpak5bj6718i9l8tn3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
